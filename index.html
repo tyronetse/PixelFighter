@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Pixel Fighter</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="wrap">
+  <div id="stage">
+    <canvas id="game" width="960" height="540"></canvas>
+    <div id="rotate-hint">Rotate your device for full screen</div>
+    <button id="startBtn">START FIGHT</button>
+    <button id="rematchBtn" class="hidden">REMATCH</button>
+    <button id="muteBtn" title="Mute / unmute">🔊</button>
+    <div id="touch">
+      <div class="side">
+        <button data-k="left" aria-label="Move left">◀</button>
+        <button data-k="right" aria-label="Move right">▶</button>
+        <button data-k="jump">JUMP</button>
+        <button data-k="block">BLOCK</button>
+      </div>
+      <div class="side">
+        <button data-k="punch">PUNCH</button>
+        <button data-k="kick">KICK</button>
+        <button data-k="fire">FIRE</button>
+      </div>
+    </div>
+  </div>
+  <div id="help">
+    <b>Keyboard:</b> A/D or ←/→ move &nbsp;·&nbsp; W or ↑ jump &nbsp;·&nbsp; S or ↓ crouch &nbsp;·&nbsp; J punch &nbsp;·&nbsp; K kick &nbsp;·&nbsp; L fireball &nbsp;·&nbsp; hold AWAY from your opponent to block &nbsp;·&nbsp; M mute &nbsp;·&nbsp; Enter start / rematch
+  </div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>

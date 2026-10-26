@@ -1,0 +1,41 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #0b0b0f; color: #eee; font-family: monospace; }
+#wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px; }
+#stage { position: relative; width: min(100vw - 16px, 177.78vh); aspect-ratio: 16 / 9; }
+#game { width: 100%; height: 100%; display: block; background: #1a1a2e; image-rendering: pixelated; border: 2px solid #333; }
+#rotate-hint {
+  display: none; position: absolute; inset: 0; align-items: center; justify-content: center;
+  text-align: center; font-size: 22px; font-weight: bold; color: #fff;
+  background: rgba(0, 0, 0, 0.55); pointer-events: none; z-index: 5; padding: 20px;
+}
+@media (orientation: portrait) {
+  #rotate-hint { display: flex; }
+}
+#startBtn, #rematchBtn {
+  position: absolute; left: 50%; top: 68%; transform: translateX(-50%);
+  font-family: monospace; font-size: 22px; font-weight: bold; padding: 12px 28px;
+  background: #e8492d; color: #fff; border: 3px solid #fff; cursor: pointer; z-index: 4;
+}
+#rematchBtn { top: 62%; background: #3fa7e8; }
+#muteBtn {
+  position: absolute; right: 10px; bottom: 76px; z-index: 4; font-size: 20px;
+  background: rgba(0, 0, 0, 0.5); color: #fff; border: 2px solid #888; cursor: pointer; padding: 4px 8px;
+}
+.hidden { display: none !important; }
+#touch {
+  display: none; position: absolute; left: 0; right: 0; bottom: 8px; z-index: 4;
+  justify-content: space-between; padding: 0 10px; pointer-events: none;
+}
+#stage #touch { position: absolute; }
+#touch .side { display: flex; gap: 8px; pointer-events: auto; }
+#touch button {
+  font-family: monospace; font-size: 15px; font-weight: bold; color: #fff;
+  background: rgba(20, 20, 30, 0.65); border: 2px solid #ccc; border-radius: 8px;
+  min-width: 58px; min-height: 52px; padding: 6px 10px; touch-action: none; user-select: none;
+}
+#touch button:active { background: rgba(232, 73, 45, 0.8); }
+@media (pointer: coarse) {
+  #touch { display: flex; }
+  #help { display: none; }
+}
+#help { font-size: 13px; color: #bbb; text-align: center; max-width: 960px; line-height: 1.5; }
