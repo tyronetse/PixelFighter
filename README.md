@@ -4,6 +4,10 @@ An 8-bit pixel-art fighting game that runs entirely in the browser — no build
 step, no external assets, no network requests. Two original fighters battle
 best-of-3 rounds on a 960×540 landscape stage.
 
+## Play it
+
+Play it here: https://tyronetse.github.io/PixelFighter/
+
 ## The fighters
 
 - **Ember** (you) — fire theme, orange/red palette.
