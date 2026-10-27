@@ -101,6 +101,72 @@
     '...DDD...DDD....',
     '...DDD...DDD....'
   ];
+  var WALK_C = [
+    '................',
+    '.....HHHHHH.....',
+    '....HHHHHHHH....',
+    '....HSSSSSSH....',
+    '....HSESSESH....',
+    '.....SSSSSS.....',
+    '....CCCCCCCC....',
+    '...CCCCCCCCCC...',
+    '..CC.CCCCCCC.CC.',
+    '..CC.CCCCCCC.CC.',
+    '..CC..CCCCCC.CC.',
+    '.....CCCCCC.....',
+    '.....DDDDDD.....',
+    '....DDDDDDDD....',
+    '....DD....DD....',
+    '....DD.....DD...',
+    '...DDD......DD..',
+    '..DDD........DD.',
+    '..DD.........DDD',
+    '..DD.........DDD'
+  ];
+  var WALK_D = [
+    '................',
+    '.....HHHHHH.....',
+    '....HHHHHHHH....',
+    '....HSSSSSSH....',
+    '....HSESSESH....',
+    '.....SSSSSS.....',
+    '....CCCCCCCC....',
+    '...CCCCCCCCCC...',
+    '..CC.CCCCCCC.CC.',
+    '..CC.CCCCCCC.CC.',
+    '..CC..CCCCCC.CC.',
+    '.....CCCCCC.....',
+    '.....DDDDDD.....',
+    '....DDDDDDDD....',
+    '.....DD..DD.....',
+    '.....DD..DD.....',
+    '.....DD..DD.....',
+    '.....DD..DD.....',
+    '....DDD..DDD....',
+    '....DDD..DDD....'
+  ];
+  var PUNCH_WINDUP = [
+    '................',
+    '.....HHHHHH.....',
+    '....HHHHHHHH....',
+    '....HSSSSSSH....',
+    '....HSESSESH....',
+    '.....SSSSSS.....',
+    '....CCCCCCCC....',
+    '...CCCCCCCCCC...',
+    'FFCC.CCCCCCC.CC.',
+    'FFCC.CCCCCCC.CC.',
+    '..CC..CCCCCC.CC.',
+    '.....CCCCCC.....',
+    '.....DDDDDD.....',
+    '....DDDDDDDD....',
+    '....DD....DD....',
+    '....DD....DD....',
+    '....DD....DD....',
+    '....DD....DD....',
+    '...DDD....DDD...',
+    '...DDD....DDD...'
+  ];
   var PUNCH_MAP = [
     '................',
     '.....HHHHHH.....',
@@ -123,6 +189,28 @@
     '...DDD....DDD...',
     '...DDD....DDD...'
   ];
+  var KICK_LIFT = [
+    '................',
+    '.....HHHHHH.....',
+    '....HHHHHHHH....',
+    '....HSSSSSSH....',
+    '....HSESSESH....',
+    '.....SSSSSS.....',
+    '....CCCCCCCC....',
+    '...CCCCCCCCCC...',
+    '..CC.CCCCCCC.CC.',
+    '..CC.CCCCCCC.CC.',
+    '..CC..CCCCCC.CC.',
+    '.....CCCCCC.....',
+    '.....DDDDDD.....',
+    '....DDDDDDDD....',
+    '....DD....DD....',
+    '....DD....DDDD..',
+    '....DD....DDDD..',
+    '....DD..........',
+    '...DDD..........',
+    '...DDD..........'
+  ];
   var KICK_MAP = [
     '................',
     '.....HHHHHH.....',
@@ -144,6 +232,28 @@
     '....DD..........',
     '...DDD..........',
     '...DDD..........'
+  ];
+  var FIRE_MAP = [
+    '................',
+    '.....HHHHHH.....',
+    '....HHHHHHHH....',
+    '....HSSSSSSH....',
+    '....HSESSESH....',
+    '.....SSSSSS.....',
+    '....CCCCCCCC....',
+    '...CCCCCCCCCC...',
+    '..CC.CCCCCCCCCFF',
+    '..CC.CCCCCCCCCFF',
+    '..CC..CCCCCC....',
+    '.....CCCCCC.....',
+    '.....DDDDDD.....',
+    '....DDDDDDDD....',
+    '....DD....DD....',
+    '....DD....DD....',
+    '....DD....DD....',
+    '....DD....DD....',
+    '...DDD....DDD...',
+    '...DDD....DDD...'
   ];
   var CROUCH_MAP = [
     '................',
@@ -612,9 +722,13 @@
     if (f.state === 'block') { return BLOCK_MAP; }
     if (f.state === 'crouch') { return CROUCH_MAP; }
     if (f.state === 'jump' || f.y > 0) { return JUMP_MAP; }
-    if (f.state === 'punch' || f.state === 'fire') { return PUNCH_MAP; }
-    if (f.state === 'kick') { return KICK_MAP; }
-    if (f.state === 'walk') { return Math.floor(f.t / 0.16) % 2 === 0 ? WALK_A : WALK_B; }
+    if (f.state === 'punch') { return f.t < PUNCH.startup ? PUNCH_WINDUP : PUNCH_MAP; }
+    if (f.state === 'fire') { return FIRE_MAP; }
+    if (f.state === 'kick') { return f.t < KICK.startup ? KICK_LIFT : KICK_MAP; }
+    if (f.state === 'walk') {
+      var frames = [WALK_A, WALK_B, WALK_C, WALK_D];
+      return frames[Math.floor(f.t / 0.12) % 4];
+    }
     return Math.floor(f.t / 0.4) % 2 === 0 ? IDLE_A : IDLE_B;
   }
 
@@ -759,8 +873,9 @@
     set aiEnabled(v) { aiEnabled = v; },
     get aiEnabled() { return aiEnabled; },
     sprites: { IDLE_A: IDLE_A, IDLE_B: IDLE_B, WALK_A: WALK_A, WALK_B: WALK_B,
-      PUNCH_MAP: PUNCH_MAP, KICK_MAP: KICK_MAP, CROUCH_MAP: CROUCH_MAP,
-      JUMP_MAP: JUMP_MAP, HIT_MAP: HIT_MAP, BLOCK_MAP: BLOCK_MAP, KO_MAP: KO_MAP }
+      WALK_C: WALK_C, WALK_D: WALK_D, PUNCH_WINDUP: PUNCH_WINDUP, PUNCH_MAP: PUNCH_MAP,
+      KICK_LIFT: KICK_LIFT, KICK_MAP: KICK_MAP, FIRE_MAP: FIRE_MAP,
+      CROUCH_MAP: CROUCH_MAP, JUMP_MAP: JUMP_MAP, HIT_MAP: HIT_MAP, BLOCK_MAP: BLOCK_MAP, KO_MAP: KO_MAP }
   };
 
   draw();

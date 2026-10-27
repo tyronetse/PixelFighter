@@ -15,13 +15,14 @@
     <button id="rematchBtn" class="hidden">REMATCH</button>
     <button id="muteBtn" title="Mute / unmute">🔊</button>
     <div id="touch">
-      <div class="side">
-        <button data-k="left" aria-label="Move left">◀</button>
-        <button data-k="right" aria-label="Move right">▶</button>
-        <button data-k="jump">JUMP</button>
-        <button data-k="block">BLOCK</button>
+      <div id="dpad" aria-label="Movement pad">
+        <button data-k="up" class="dpad-up" aria-label="Jump">▲</button>
+        <button data-k="left" class="dpad-left" aria-label="Move left">◀</button>
+        <button data-k="right" class="dpad-right" aria-label="Move right">▶</button>
+        <button data-k="down" class="dpad-down" aria-label="Crouch">▼</button>
       </div>
       <div class="side">
+        <button data-k="block">BLOCK</button>
         <button data-k="punch">PUNCH</button>
         <button data-k="kick">KICK</button>
         <button data-k="fire">FIRE</button>

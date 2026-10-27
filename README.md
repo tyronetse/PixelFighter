@@ -41,9 +41,12 @@ characters, names, or sprites are used.
 
 ### Touch (mobile)
 
-On-screen buttons for Left, Right, Jump, Block, Punch, Kick, and Fire drive
-the exact same input state as the keyboard. On portrait phones/tablets a
-"rotate for full screen" hint appears over the game — the stage is landscape.
+On-screen controls drive the exact same input state as the keyboard: a
+cross-shaped D-pad on the left (▲ jump, ▼ crouch, ◀ ▶ move) and BLOCK,
+PUNCH, KICK, and FIRE buttons on the right. The D-pad buttons are separate
+touch targets, so multi-touch works — hold ▶ and tap ▲ to jump forward.
+On portrait phones/tablets a "rotate for full screen" hint appears over the
+game — the stage is landscape.
 
 ## The computer opponent
 

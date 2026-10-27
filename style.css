@@ -14,7 +14,7 @@ html, body { margin: 0; padding: 0; background: #0b0b0f; color: #eee; font-famil
 #startBtn, #rematchBtn {
   position: absolute; left: 50%; top: 68%; transform: translateX(-50%);
   font-family: monospace; font-size: 22px; font-weight: bold; padding: 12px 28px;
-  background: #e8492d; color: #fff; border: 3px solid #fff; cursor: pointer; z-index: 4;
+  background: #e8492d; color: #fff; border: 3px solid #fff; cursor: pointer; z-index: 6;
 }
 #rematchBtn { top: 62%; background: #3fa7e8; }
 #muteBtn {
@@ -24,10 +24,26 @@ html, body { margin: 0; padding: 0; background: #0b0b0f; color: #eee; font-famil
 .hidden { display: none !important; }
 #touch {
   display: none; position: absolute; left: 0; right: 0; bottom: 8px; z-index: 4;
-  justify-content: space-between; padding: 0 10px; pointer-events: none;
+  justify-content: space-between; align-items: flex-end; padding: 0 10px; pointer-events: none;
 }
 #stage #touch { position: absolute; }
 #touch .side { display: flex; gap: 8px; pointer-events: auto; }
+/* D-pad: cross-shaped joypad, one real button per direction so multi-touch
+   still works (hold right + tap up = jump forward). Center cell stays empty. */
+#dpad {
+  display: grid; grid-template-columns: repeat(3, 52px); grid-template-rows: repeat(3, 52px);
+  gap: 2px; pointer-events: auto;
+}
+#dpad button {
+  font-family: monospace; font-size: 20px; font-weight: bold; color: #fff;
+  background: rgba(20, 20, 30, 0.65); border: 2px solid #ccc; border-radius: 8px;
+  min-width: 0; width: 100%; height: 100%; padding: 0; touch-action: none; user-select: none;
+}
+#dpad button:active { background: rgba(232, 73, 45, 0.8); }
+#dpad .dpad-up { grid-column: 2; grid-row: 1; }
+#dpad .dpad-left { grid-column: 1; grid-row: 2; }
+#dpad .dpad-right { grid-column: 3; grid-row: 2; }
+#dpad .dpad-down { grid-column: 2; grid-row: 3; }
 #touch button {
   font-family: monospace; font-size: 15px; font-weight: bold; color: #fff;
   background: rgba(20, 20, 30, 0.65); border: 2px solid #ccc; border-radius: 8px;
